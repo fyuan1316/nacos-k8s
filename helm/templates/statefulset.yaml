@@ -145,10 +145,18 @@ spec:
             - name: data
               mountPath: /home/nacos/logs
               subPath: logs
+            - mountPath: /home/nacos/conf/application.properties
+              name: config
+              subPath: application.properties
       {{- if not .Values.persistence.enabled  }}
       volumes:
         - name: data
           emptyDir: { }
+        - configMap:
+            defaultMode: 420
+            name: nacos-conf
+          name: config
+
   {{- end }}
   {{- if .Values.persistence.enabled }}
   volumeClaimTemplates:

@@ -12,6 +12,10 @@ spec:
       targetPort: {{ .Values.nacos.serverPort }}
       protocol: TCP
       name: http
+    - port: 18848
+      targetPort: 18848
+      protocol: TCP
+      name: http2
     - port: {{ add .Values.service.port 1000}}
       name: client-rpc
       targetPort: {{add .Values.nacos.serverPort 1000}}
@@ -44,6 +48,10 @@ spec:
       targetPort: {{ .Values.nacos.serverPort }}
       protocol: TCP
       name: http
+    - port: 18848
+      targetPort: 18848
+      protocol: TCP
+      name: http2
     - port: {{ add .Values.service.port 1000}}
       name: client-rpc
       targetPort: {{add .Values.nacos.serverPort 1000}}
