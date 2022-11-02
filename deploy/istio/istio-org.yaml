@@ -1,0 +1,67 @@
+apiVersion: v1
+data:
+  mesh: |-
+    defaultConfig:
+      concurrency: 0
+      discoveryAddress: istiod-1-14.istio-system.svc:15012
+      extraStatTags:
+      - mesh_id
+      - request_operation_path
+      gatewayTopology:
+        numTrustedProxies: 1
+      holdApplicationUntilProxyStarts: true
+      meshId: state
+      proxyMetadata:
+        ISTIO_META_DNS_AUTO_ALLOCATE: "true"
+        ISTIO_META_DNS_CAPTURE: "true"
+        PILOT_SEND_UNHEALTHY_ENDPOINTS: "false"
+      sds:
+        enabled: true
+      tracing:
+        custom_tags:
+          clusterID:
+            environment:
+              name: ISTIO_META_CLUSTER_ID
+          container_name:
+            literal:
+              value: istio-proxy
+          msname:
+            environment:
+              defaultValue: unknown
+              name: ASM_MS_NAME
+          pod_name:
+            environment:
+              defaultValue: unknown
+              name: POD_NAME
+          pod_ns:
+            environment:
+              defaultValue: unknown
+              name: POD_NAMESPACE
+        zipkin:
+          address: zipkin.istio-system:9411
+    defaultHttpRetryPolicy:
+      attempts: 2
+    enablePrometheusMerge: true
+    localityLbSetting:
+      enabled: true
+    rootNamespace: istio-system
+    trustDomain: cluster.local
+  meshNetworks: 'networks: {}'
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"mesh":"defaultConfig:\n  concurrency: 0\n  discoveryAddress: istiod-1-14.istio-system.svc:15012\n  extraStatTags:\n  - mesh_id\n  - request_operation_path\n  gatewayTopology:\n    numTrustedProxies: 1\n  holdApplicationUntilProxyStarts: true\n  meshId: state\n  proxyMetadata:\n    ISTIO_META_DNS_AUTO_ALLOCATE: \"true\"\n    ISTIO_META_DNS_CAPTURE: \"true\"\n    PILOT_SEND_UNHEALTHY_ENDPOINTS: \"false\"\n  sds:\n    enabled: true\n  tracing:\n    custom_tags:\n      clusterID:\n        environment:\n          name: ISTIO_META_CLUSTER_ID\n      container_name:\n        literal:\n          value: istio-proxy\n      msname:\n        environment:\n          defaultValue: unknown\n          name: ASM_MS_NAME\n      pod_name:\n        environment:\n          defaultValue: unknown\n          name: POD_NAME\n      pod_ns:\n        environment:\n          defaultValue: unknown\n          name: POD_NAMESPACE\n    zipkin:\n      address: zipkin.istio-system:9411\ndefaultHttpRetryPolicy:\n  attempts: 2\nenablePrometheusMerge: true\nlocalityLbSetting:\n  enabled: true\nrootNamespace: istio-system\ntrustDomain: cluster.local","meshNetworks":"networks: {}"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"install.operator.istio.io/owning-resource":"istio-114","install.operator.istio.io/owning-resource-namespace":"istio-system","istio.io/rev":"1-14","operator.istio.io/component":"Pilot","operator.istio.io/managed":"Reconcile","operator.istio.io/version":"1.14.1-v3.11-81-506ca8cdac8bdf25b6571","release":"istio"},"name":"istio-1-14","namespace":"istio-system"}}
+  creationTimestamp: "2022-11-02T02:04:36Z"
+  labels:
+    install.operator.istio.io/owning-resource: istio-114
+    install.operator.istio.io/owning-resource-namespace: istio-system
+    istio.io/rev: 1-14
+    operator.istio.io/component: Pilot
+    operator.istio.io/managed: Reconcile
+    operator.istio.io/version: 1.14.1-v3.11-81-506ca8cdac8bdf25b6571
+    release: istio
+  name: istio-1-14
+  namespace: istio-system
+  resourceVersion: "1099356"
+  uid: 096dbf87-04c6-4cb7-9ba1-35a94b32e8ce
